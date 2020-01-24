@@ -1,19 +1,17 @@
 /**
   * @file    OPT3001.h
-  * @version 1.0.0
+  * @version 0.1.0
   * @author  
   * @brief   Header file of the OPT3001 driver module
   * 
   * Example: 
   * code
-  * #include "mbed.h"
-  * #include "main.h"
   * #include "OPT3001/OPT3001.h"
   *
   * OPT3001 OPT3001(SDA,SCL); 
   *  
   * int main() {
-  * float lght_lx =  HDC1080.Readlight();  
+  *     float lght_lux=OPT3001.Readlight();
   * }
   * @endcode
   */
@@ -54,19 +52,23 @@
 #define OPT3001_CFG_DEFAULT_1                   0xAE
 #define OPT3001_CFG_DEFAULT                     0x0C
 
-class OPT3001:public I2C {
-public:
-      
-    OPT3001( PinName sda, PinName slc) ;                 // constructor
+class OPT3001:public I2C 
+{
+    public:
+        /** Class constructor 
+         */
+        OPT3001( PinName sda, PinName slc);
 
-//    ~OPT3001();                                          // destructor
-    
-    int ReadSignature(void);
-    float Readlight( void);                                
-    unsigned long ReadDeviceId(void);            
-    
-protected:
-     uint16_t read2Bytes(int chip_addr, int offset);
+        /** Class destructor
+		 */
+        // ~OPT3001(); 
+        
+        int ReadSignature(void);
+        float Readlight( void);                                
+        unsigned long ReadDeviceId(void);            
+        
+    protected:
+        uint16_t read2Bytes(int chip_addr, int offset);
 };
 
 #endif 
